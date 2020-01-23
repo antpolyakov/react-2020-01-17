@@ -4,7 +4,7 @@ import Review from './review'
 function Reviews(props) {
   return (
     <div>
-      {props.restaurant.reviews.map(review => {
+      {props.items.map(review => {
         const {id, ...reviewProps} = review
         return <Review key={id} {...reviewProps} />
       })}

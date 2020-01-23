@@ -8,10 +8,10 @@ function Restaurant(props) {
       <h1>{props.name}</h1>
       <hr />
       <h2>Menu</h2>
-      <Menu restaurant={props} />
+      <Menu items={props.menu} />
       <hr />
       <h2>Reviews</h2>
-      <Reviews restaurant={props} />
+      <Reviews items={props.reviews} />
     </div>
   )
 }
