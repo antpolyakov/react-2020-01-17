@@ -1,6 +1,7 @@
 import React, {useMemo} from 'react'
 import Menu from './menu'
 import Reviews from './reviews'
+import ReviewRating from './review-rating'
 
 const RATING_PRECISION = 0.1
 
@@ -19,7 +20,8 @@ function Restaurant(props) {
     <div>
       <h1>{props.name}</h1>
       <div>
-        Average rating: <b>{avgRating}</b> ({props.reviews.length} reviews)
+        Average rating: <ReviewRating value={avgRating} /> <b>{avgRating}</b> (
+        {props.reviews.length} reviews)
       </div>
       <hr />
       <h2>Menu</h2>
