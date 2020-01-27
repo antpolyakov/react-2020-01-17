@@ -1,4 +1,5 @@
 import React, {useCallback, useMemo, useState} from 'react'
+import PropTypes from 'prop-types'
 import Restaurant from '../restaurant'
 import RestaurantsNavigation from '../restaurants-navigation'
 
@@ -21,6 +22,10 @@ function Restaurants(props) {
       <Restaurant restaurant={restaurant} />
     </div>
   )
+}
+
+Restaurants.propTypes = {
+  restaurants: PropTypes.array.isRequired,
 }
 
 export default Restaurants
