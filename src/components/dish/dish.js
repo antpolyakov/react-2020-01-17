@@ -8,7 +8,7 @@ import {selectAmountFromCart, selectDish} from '../../store/selectors'
 
 function Dish(props) {
   const {
-    id,
+    // id,
 
     // from store
     amount,
