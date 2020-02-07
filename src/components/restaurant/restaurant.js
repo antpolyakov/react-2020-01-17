@@ -10,6 +10,7 @@ import Order from '../order'
 
 export const RestaurantProps = {
   restaurant: PropTypes.shape({
+    id: PropTypes.string,
     name: PropTypes.string,
     menu: PropTypes.array,
     reviews: PropTypes.array,
@@ -31,14 +32,14 @@ class Restaurant extends Component {
 
   render() {
     const {
-      restaurant: {name, menu, reviews},
+      restaurant: {id, name, menu, reviews},
     } = this.props
     return (
       <div data-automation-id="RESTAURANT_CONTAINER">
         <Hero heading={name}>{<AverageRating reviews={reviews} />}</Hero>
         <Row>
           <Col span={18} className={styles.restaurantContent}>
-            <Reviews reviews={reviews} />
+            <Reviews restaurantId={id} reviews={reviews} />
             <Dishes menu={menu} />
           </Col>
           <Col span={6}>
