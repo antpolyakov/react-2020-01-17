@@ -27,11 +27,13 @@ export const selectAmountFromCart = createSelector(
 export const selectCartInfo = createSelector(
   selectCart,
   selectRestaurantList,
-  (cart, restaurants) => {
+  selectDishes,
+  (cart, restaurants, dishes) => {
     const orderedDishes = restaurants.reduce(
       (result, restaurant) => {
-        restaurant.menu.forEach(dish => {
-          const amount = cart[dish.id]
+        restaurant.menu.forEach(dishId => {
+          const dish = dishes[dishId]
+          const amount = cart[dishId]
           if (amount) {
             const totalDishPrice = amount * dish.price
             result.totalPrice += totalDishPrice
