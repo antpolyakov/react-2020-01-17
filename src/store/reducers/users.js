@@ -1,4 +1,5 @@
 import {normalizedUsers} from '../../fixtures'
+import {ADD_USER} from '../common'
 
 const initialState = normalizedUsers.reduce((users, user) => {
   return {
@@ -8,6 +9,12 @@ const initialState = normalizedUsers.reduce((users, user) => {
 }, {})
 
 export const usersReducer = (usersState = initialState, action) => {
-  // TODO ADD_USER
+  if (action.type === ADD_USER) {
+    const userData = action.payload
+    return {
+      ...usersState,
+      [userData.id]: userData,
+    }
+  }
   return usersState
 }
