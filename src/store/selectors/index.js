@@ -57,3 +57,20 @@ export const selectCartInfo = createSelector(
     }
   }
 )
+
+export const selectUsers = state => state.users
+
+export const selectReviews = state => state.reviews
+
+export const selectReview = createSelector(
+  selectReviews,
+  selectId,
+  selectUsers,
+  (reviews, id, users) => {
+    const review = reviews[id]
+    return {
+      ...review,
+      user: users[review.userId].name,
+    }
+  }
+)
