@@ -74,3 +74,15 @@ export const selectReview = createSelector(
     }
   }
 )
+
+export const selectRestaurantReviewIds = (state, props) => props.reviews
+
+export const selectAvgRating = createSelector(
+  selectReviews,
+  selectRestaurantReviewIds,
+  (allReviews, restaurantReviewIds) =>
+    restaurantReviewIds.reduce(
+      (acc, reviewId) => acc + allReviews[reviewId].rating,
+      0
+    ) / restaurantReviewIds.length
+)
