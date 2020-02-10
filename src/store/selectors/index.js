@@ -11,8 +11,9 @@ export const selectReviewsMap = store =>
 
 export const selectUsersMap = store => store.users
 
-export const selectUserList = createSelector(selectUsersMap, usersMap =>
-  Object.values(usersMap)
+export const selectUserList = createSelector(
+  selectUsersMap,
+  usersMap => usersMap && Object.values(usersMap)
 )
 
 export const selectId = (_, ownProps) => ownProps.id
@@ -54,7 +55,7 @@ export const selectUser = createSelector(
   selectUsersMap,
   selectId,
   (users, id) => {
-    return users[id]
+    return users?.[id]
   }
 )
 

@@ -3,15 +3,16 @@ import Restaurant from '../restaurant'
 import RestaurantsNavigation from '../restaurants-navigation'
 import {connect} from 'react-redux'
 import {selectRestaurants} from '../../store/selectors'
-import {fetchRestaurants} from '../../store/action-creators'
+import {fetchRestaurants, fetchUsers} from '../../store/action-creators'
 
 function Restaurants(props) {
   const [currentId, setCurrentId] = useState(null)
-  const {fetchRestaurants} = props
+  const {fetchRestaurants, fetchUsers} = props
 
   useEffect(() => {
     fetchRestaurants && fetchRestaurants()
-  }, [fetchRestaurants])
+    fetchUsers && fetchUsers()
+  }, [fetchRestaurants, fetchUsers])
 
   const restaurant = props.restaurants.find(
     restaurant => restaurant.id === currentId
@@ -49,6 +50,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchRestaurants,
+  fetchUsers,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Restaurants)
