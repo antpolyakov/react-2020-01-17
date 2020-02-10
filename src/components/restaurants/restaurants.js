@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import Restaurant from '../restaurant'
 import RestaurantsNavigation from '../restaurants-navigation'
 import {connect} from 'react-redux'
@@ -7,10 +7,11 @@ import {fetchRestaurants} from '../../store/action-creators'
 
 function Restaurants(props) {
   const [currentId, setCurrentId] = useState(null)
+  const {fetchRestaurants} = props
 
   useEffect(() => {
-    props.fetchRestaurants && props.fetchRestaurants()
-  }, [])
+    fetchRestaurants && fetchRestaurants()
+  }, [fetchRestaurants])
 
   const restaurant = props.restaurants.find(
     restaurant => restaurant.id === currentId
@@ -24,7 +25,7 @@ function Restaurants(props) {
       return
     }
     setCurrentId(currentId || props.restaurants[0].id)
-  }, [props.restaurants.length])
+  }, [props.restaurants, currentId])
 
   if (props.restaurants.length === 0 || !currentId) {
     return <h1>Loading...</h1>
