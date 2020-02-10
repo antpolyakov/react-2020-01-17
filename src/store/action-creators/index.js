@@ -4,6 +4,7 @@ import {
   DECREMENT,
   FETCH_DISHES,
   FETCH_RESTAURANTS,
+  FETCH_REVIEWS,
   INCREMENT,
   REMOVE_FROM_CART,
 } from '../common'
@@ -70,3 +71,8 @@ export const fetchDishes = () => (dispatch, getState) => {
     })
     .catch(e => console.warn(e))
 }
+
+export const fetchReviews = id => ({
+  type: FETCH_REVIEWS,
+  callAPI: id ? `/api/reviews?id=${id}` : '/api/reviews',
+})

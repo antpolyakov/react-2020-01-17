@@ -7,10 +7,28 @@ import Hero from '../hero'
 import styles from './restaurant.module.css'
 import {Col, Row} from 'antd'
 import Cart from '../cart'
+import {fetchReviews} from '../../store/action-creators'
+import {connect} from 'react-redux'
 
 class Restaurant extends Component {
   state = {
     error: null,
+  }
+
+  componentDidMount() {
+    const {
+      fetchReviews,
+      restaurant: {id},
+    } = this.props
+    fetchReviews && fetchReviews(id)
+  }
+
+  componentDidUpdate(prevProps) {
+    const {id} = this.props.restaurant
+    if (id !== prevProps.restaurant.id) {
+      const {fetchReviews} = this.props
+      fetchReviews && fetchReviews(id)
+    }
   }
 
   componentDidCatch(error, errorInfo) {
@@ -48,4 +66,8 @@ Restaurant.propTypes = {
   }),
 }
 
-export default Restaurant
+const mapDispatchToProps = {
+  fetchReviews,
+}
+
+export default connect(null, mapDispatchToProps)(Restaurant)

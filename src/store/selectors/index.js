@@ -6,7 +6,8 @@ export const selectCart = state => state.cart
 
 export const selectDishesMap = store => store.dishes
 
-export const selectReviewsMap = store => store.reviews.toJS()
+export const selectReviewsMap = store =>
+  store.reviews.isEmpty() ? null : store.reviews.toJS()
 
 export const selectUsersMap = store => store.users
 
@@ -62,10 +63,21 @@ export const selectReviews = createSelector(
   selectRestaurants,
   selectId,
   (reviews, restaurants, id) => {
-    const restaurant = restaurants.find(item => item.id === id)
-    return restaurant
-      ? restaurant.reviews.map(reviewId => reviews[reviewId])
-      : []
+    if (reviews) {
+      const restaurant = restaurants.find(item => item.id === id)
+      if (restaurant) {
+        return restaurant.reviews.reduce((acc, reviewId) => {
+          const review = reviews[reviewId]
+          if (review) {
+            const result = [...acc]
+            result.push(review)
+            return result
+          }
+          return acc
+        }, [])
+      }
+    }
+    return []
   }
 )
 
