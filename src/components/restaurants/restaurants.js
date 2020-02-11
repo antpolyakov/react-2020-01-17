@@ -2,26 +2,40 @@ import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import Restaurant from '../restaurant'
 import RestaurantsNavigation from '../restaurants-navigation'
 import {connect} from 'react-redux'
-import {selectRestaurants, selectUserList} from '../../store/selectors'
-import {fetchRestaurants, fetchUsers} from '../../store/action-creators'
+import {
+  selectDishes,
+  selectRestaurants,
+  selectUserList,
+} from '../../store/selectors'
+import {
+  fetchDishes,
+  fetchRestaurants,
+  fetchUsers,
+} from '../../store/action-creators'
 import {Progress} from 'antd'
 
 const defaultLoadProgressState = {
   restaurants: 'рестораны',
   users: 'пользователи',
-  //dishes: 'блюда'
+  dishes: 'блюда',
 }
 
 function Restaurants(props) {
   const [currentId, setCurrentId] = useState(null)
-  const {restaurants, users, fetchRestaurants, fetchUsers} = props
+  const {
+    restaurants,
+    usersLoaded,
+    dishesLoaded,
+    fetchRestaurants,
+    fetchUsers,
+    fetchDishes,
+  } = props
 
   useEffect(() => {
     fetchRestaurants && fetchRestaurants()
     fetchUsers && fetchUsers()
-    // TODO load dishes right here
-    //fetchDishes && fetchDishes()
-  }, [fetchRestaurants, fetchUsers])
+    fetchDishes && fetchDishes()
+  }, [fetchRestaurants, fetchUsers, fetchDishes])
 
   useEffect(() => {
     !currentId && restaurants.length && setCurrentId(restaurants[0].id)
@@ -39,18 +53,26 @@ function Restaurants(props) {
       restaurants: false,
     })
   }
-  if (loadProgress.users && users) {
+  if (loadProgress.users && usersLoaded) {
     setLoadProgress({
       ...loadProgress,
       users: false,
     })
   }
-  // TODO loadProgress.dishes && dishes
+  if (loadProgress.dishes && dishesLoaded) {
+    setLoadProgress({
+      ...loadProgress,
+      dishes: false,
+    })
+  }
 
   const [loadProgressList, loadProgressPercent] = useMemo(() => {
     const list = Object.values(loadProgress)
     const inProgressList = list.filter(item => item)
     // TODO calculate 'loadProgressPercent'
+    console.log(
+      `+load progress: ${list.length - inProgressList.length}/${list.length}`
+    )
     return [inProgressList, 100]
   }, [loadProgress])
 
@@ -86,12 +108,14 @@ function Restaurants(props) {
 
 const mapStateToProps = state => ({
   restaurants: selectRestaurants(state),
-  users: selectUserList(state),
+  usersLoaded: !!selectUserList(state),
+  dishesLoaded: selectDishes(state).length > 0,
 })
 
 const mapDispatchToProps = {
   fetchRestaurants,
   fetchUsers,
+  fetchDishes,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Restaurants)
