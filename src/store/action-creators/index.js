@@ -4,6 +4,7 @@ import {
   DECREMENT,
   FETCH_DISHES,
   FETCH_RESTAURANTS,
+  FETCH_REVIEWS_START,
   FETCH_REVIEWS,
   FETCH_USERS,
   INCREMENT,
@@ -75,6 +76,9 @@ export const fetchDishes = () => (dispatch, getState) => {
 
 export const fetchReviews = id => ({
   type: FETCH_REVIEWS,
+  beforeAction: {
+    type: FETCH_REVIEWS_START,
+  },
   callAPI: id ? `/api/reviews?id=${id}` : '/api/reviews',
 })
 
