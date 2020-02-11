@@ -6,8 +6,10 @@ export const selectCart = state => state.cart
 
 export const selectDishesMap = store => store.dishes
 
-export const selectReviewsMap = store =>
-  store.reviews.isEmpty() ? null : store.reviews.toJS()
+export const selectReviewsMap = createSelector(
+  store => store.reviews,
+  reviews => (reviews.isEmpty() ? null : reviews.toJS())
+)
 
 export const selectUsersMap = store => store.users
 
@@ -78,12 +80,13 @@ export const selectReviews = createSelector(
         }, [])
       }
     }
-    return []
+    return null
   }
 )
 
 export const selectAverageRating = createSelector(selectReviews, reviews => {
   const rawRating =
+    reviews &&
     reviews.reduce((acc, {rating}) => {
       return acc + rating
     }, 0) / reviews.length
