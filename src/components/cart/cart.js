@@ -12,7 +12,12 @@ import './cart.css'
 import {selectOrderedDishes} from '../../store/selectors'
 import {CART_PAGE_PATH} from '../routes/common'
 
-function Cart({className, orderedDishes}) {
+const defaultAction = {
+  text: 'Order',
+  url: CART_PAGE_PATH,
+}
+
+function Cart({className, orderedDishes, action = defaultAction}) {
   const history = useHistory()
   const go = useCallback(url => history.push(url), [history])
 
@@ -44,14 +49,16 @@ function Cart({className, orderedDishes}) {
       <CartRow leftContent={'Sub-total'} rightContent={`${totalPrice} $`} />
       <CartRow leftContent={'Delivery costs'} rightContent="FREE" />
       <CartRow leftContent={'Total'} rightContent={`${totalPrice} $`} />
-      <Button
-        type="primary"
-        size="large"
-        block
-        onClick={() => go(CART_PAGE_PATH)}
-      >
-        Order
-      </Button>
+      {action && (
+        <Button
+          type="primary"
+          size="large"
+          block
+          onClick={() => go(action.url)}
+        >
+          {action.text}
+        </Button>
+      )}
     </div>
   )
 }
