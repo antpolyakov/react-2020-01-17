@@ -10,10 +10,12 @@ import RestaurantsPage from '../routes/restaurants'
 import {
   CART_PAGE_PATH,
   COUNTER_PAGE_PATH,
+  ORDER_COMPLETE_PAGE_PATH,
   RESTAURANT_PAGE_PATH,
   ROOT_PATH,
 } from '../routes/common'
 import CartPage from '../routes/cart'
+import OrderCompletePage from '../routes/order-complete'
 
 class App extends Component {
   render() {
@@ -40,6 +42,10 @@ class App extends Component {
                     render={() => <RestaurantsPage />}
                   />
                   <Route path={CART_PAGE_PATH} component={CartPage} />
+                  <Route
+                    path={ORDER_COMPLETE_PAGE_PATH}
+                    component={OrderCompletePage}
+                  />
                   <Route
                     path={ROOT_PATH}
                     render={() => <h1>Page Not Found</h1>}
