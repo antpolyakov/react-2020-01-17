@@ -8,10 +8,12 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import CounterPage from '../routes/counter'
 import RestaurantsPage from '../routes/restaurants'
 import {
+  CART_PAGE_PATH,
   COUNTER_PAGE_PATH,
   RESTAURANT_PAGE_PATH,
   ROOT_PATH,
 } from '../routes/common'
+import CartPage from '../routes/cart'
 
 class App extends Component {
   render() {
@@ -37,6 +39,7 @@ class App extends Component {
                     exact
                     render={() => <RestaurantsPage />}
                   />
+                  <Route path={CART_PAGE_PATH} component={CartPage} />
                   <Route
                     path={ROOT_PATH}
                     render={() => <h1>Page Not Found</h1>}
