@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 
 class RestaurantsNavigation extends Component {
   render() {
-    const {restaurants, onRestaurantChange} = this.props
+    const {restaurants} = this.props
     return (
       <div className={styles.list}>
         {restaurants.map(({id, name}) => (

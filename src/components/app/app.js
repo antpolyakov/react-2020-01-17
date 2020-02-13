@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Restaurants from '../restaurants'
 import {Layout} from 'antd'
 import Header from '../header'
 import './app.css'
@@ -20,13 +19,14 @@ class App extends Component {
               <Layout.Content>
                 <Switch>
                   <Route
-                    path={'/counter/:initialValue'}
+                    path={'/counter/:initialValue?'}
                     component={CounterPage}
                   />
+                  <Route path={'/'} exact={true} component={RestaurantsPage} />
                   <Route
                     path={'/restaurant/:currentId'}
                     exact
-                    render={props => <RestaurantsPage />}
+                    render={() => <RestaurantsPage />}
                   />
                   <Route path={'/'} render={() => <h1>Page Not Found</h1>} />
                 </Switch>
