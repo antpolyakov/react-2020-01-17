@@ -44,8 +44,6 @@ class App extends Component {
   }
 
   render() {
-    // TODO remove debug
-    console.log('___', this.state.i18n, this.state.i18n.translate('Test'))
     const {lang, translate} = this.state.i18n
     return (
       <UserProvider
