@@ -5,13 +5,11 @@ import styles from './header.module.css'
 import CartBadge from '../cart-badge'
 import LangSwitch from '../lang-switch'
 
-import {LOCALES} from '../../i18n'
-
 function Header() {
   return (
     <header className={styles.header}>
       <Logo />
-      <LangSwitch locales={LOCALES} />
+      <LangSwitch />
       <CartBadge />
     </header>
   )

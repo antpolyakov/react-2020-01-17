@@ -2,9 +2,10 @@ import React, {useContext, useMemo} from 'react'
 import {Button, Dropdown, Icon, Menu} from 'antd'
 import I18nContext from '../../contexts/i18n'
 
-const LangSwitch = ({locales}) => {
-  const {i18n, handleLangChange} = useContext(I18nContext)
-  const {lang, translate: __} = i18n
+const LangSwitch = () => {
+  const {lang, translate: __, locales, handleLangChange} = useContext(
+    I18nContext
+  )
   const currentLocale = useMemo(() => locales[lang], [lang, locales])
 
   const langMenu = (
@@ -13,6 +14,7 @@ const LangSwitch = ({locales}) => {
         <Menu.Item
           key={lang}
           value={lang}
+          disabled={!handleLangChange}
           onClick={() => handleLangChange(lang)}
         >
           {__(locale)}

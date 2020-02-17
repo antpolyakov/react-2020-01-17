@@ -13,7 +13,11 @@ import {ConnectedRouter} from 'connected-react-router'
 import {history} from '../../history'
 import {Provider as UserProvider} from '../../contexts/user'
 import I18nContext from '../../contexts/i18n'
-import getTranslateFunc, {DEFAULT_LANG, defaultTranslate} from '../../i18n'
+import getTranslateFunc, {
+  DEFAULT_LANG,
+  defaultTranslate,
+  LOCALES,
+} from '../../i18n'
 
 class App extends Component {
   state = {
@@ -42,6 +46,7 @@ class App extends Component {
   render() {
     // TODO remove debug
     console.log('___', this.state.i18n, this.state.i18n.translate('Test'))
+    const {lang, translate} = this.state.i18n
     return (
       <UserProvider
         value={{
@@ -51,7 +56,9 @@ class App extends Component {
       >
         <I18nContext.Provider
           value={{
-            i18n: this.state.i18n,
+            lang,
+            translate,
+            locales: LOCALES,
             handleLangChange: this.handleLangChange,
           }}
         >
