@@ -1,3 +1,19 @@
 {
-  "Test": "Тест"
+  "Test": "Тест",
+
+  "Leave your review": "Оставьте ваш отзыв",
+  "Your name": "Ваше имя",
+  "Rating": "Оценка",
+  "PUBLISH REVIEW": "ОПУБЛИКОВАТЬ ОТЗЫВ",
+
+  "Sub-total": "Подитог",
+  "Delivery costs": "Доставка",
+  "FREE": "БЕСПЛАТНО",
+  "Total": "Итого",
+  "Order": "Заказ",
+
+  "Form": "Форма",
+  "User name": "Имя пользователя",
+  "Send order": "Разместить заказ",
+  "Thanks": "Спасибо"
 }
